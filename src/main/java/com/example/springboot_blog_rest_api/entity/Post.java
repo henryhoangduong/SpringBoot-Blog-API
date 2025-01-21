@@ -1,7 +1,11 @@
 package com.example.springboot_blog_rest_api.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "posts")
 public class Post {
