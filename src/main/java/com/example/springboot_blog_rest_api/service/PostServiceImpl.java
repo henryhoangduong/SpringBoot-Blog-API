@@ -3,6 +3,7 @@ package com.example.springboot_blog_rest_api.service;
 import com.example.springboot_blog_rest_api.entity.Post;
 import com.example.springboot_blog_rest_api.exception.ResourceNotFoundException;
 import com.example.springboot_blog_rest_api.payload.PostDto;
+import com.example.springboot_blog_rest_api.payload.PostResponse;
 import com.example.springboot_blog_rest_api.repository.PostRepository;
 import com.example.springboot_blog_rest_api.service.impl.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPosts(int pageNo, int pageSize) {
+    public PostResponse getAllPosts(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Post> posts = postRepository.findAll(pageable);
         List<Post> listOfPosts = posts.getContent();
-        return listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+        List<PostDto> content = listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+        PostResponse postResponse = new PostResponse();
+        postResponse.setContent(content);
+        postResponse.setPageNo(posts.getNumber());
+        postResponse.setTotalElements(posts.getTotalElements());
+        postResponse.setTotalPages(posts.getTotalPages());
+        postResponse.setLast(posts.isLast());
+        return postResponse;
     }
 
     @Override

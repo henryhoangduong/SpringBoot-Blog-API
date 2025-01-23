@@ -1,6 +1,7 @@
 package com.example.springboot_blog_rest_api.controller;
 
 import com.example.springboot_blog_rest_api.payload.PostDto;
+import com.example.springboot_blog_rest_api.payload.PostResponse;
 import com.example.springboot_blog_rest_api.service.impl.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDto> getAllPosts(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                                     @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+    public PostResponse getAllPosts(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                                    @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
 
         return postService.getAllPosts(pageNo,pageSize);
     }
