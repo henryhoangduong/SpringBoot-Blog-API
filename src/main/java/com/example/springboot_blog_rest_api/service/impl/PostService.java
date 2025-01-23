@@ -8,4 +8,6 @@ public interface PostService {
     PostDto createPost(PostDto postDto);
     List<PostDto> getAllPosts();
     PostDto getPostById(long Id);
+    PostDto updatePost(PostDto postDto,long Id);
+    void deletePostById(long Id);
 }
