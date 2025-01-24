@@ -1,19 +1,17 @@
-package com.example.springboot_blog_rest_api.service;
+package com.example.springboot_blog_rest_api.service.impl;
 
 import com.example.springboot_blog_rest_api.entity.Post;
 import com.example.springboot_blog_rest_api.exception.ResourceNotFoundException;
 import com.example.springboot_blog_rest_api.payload.PostDto;
 import com.example.springboot_blog_rest_api.payload.PostResponse;
 import com.example.springboot_blog_rest_api.repository.PostRepository;
-import com.example.springboot_blog_rest_api.service.impl.PostService;
+import com.example.springboot_blog_rest_api.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;

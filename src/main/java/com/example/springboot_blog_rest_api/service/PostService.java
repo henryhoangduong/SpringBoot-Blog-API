@@ -1,9 +1,7 @@
-package com.example.springboot_blog_rest_api.service.impl;
+package com.example.springboot_blog_rest_api.service;
 
 import com.example.springboot_blog_rest_api.payload.PostDto;
 import com.example.springboot_blog_rest_api.payload.PostResponse;
-
-import java.util.List;
 
 public interface PostService {
     PostDto createPost(PostDto postDto);

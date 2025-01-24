@@ -2,14 +2,12 @@ package com.example.springboot_blog_rest_api.controller;
 
 import com.example.springboot_blog_rest_api.payload.PostDto;
 import com.example.springboot_blog_rest_api.payload.PostResponse;
-import com.example.springboot_blog_rest_api.service.impl.PostService;
+import com.example.springboot_blog_rest_api.service.PostService;
 import com.example.springboot_blog_rest_api.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
