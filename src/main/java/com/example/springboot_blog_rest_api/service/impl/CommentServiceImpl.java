@@ -8,7 +8,12 @@ import com.example.springboot_blog_rest_api.repository.CommentRepository;
 import com.example.springboot_blog_rest_api.repository.PostRepository;
 import com.example.springboot_blog_rest_api.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
 public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
@@ -26,6 +31,12 @@ public class CommentServiceImpl implements CommentService {
         comment.setPost(post);
         Comment newComment = commentRepository.save(comment);
         return mapToDto(newComment);
+    }
+
+    @Override
+    public List<CommentDto> getCommentsByPostId(long postId) {
+        List<Comment> comments = commentRepository.findByPostsId(postId);
+        return comments.stream().map(comment -> mapToDto(comment)).collect(Collectors.toList());
     }
 
     private CommentDto mapToDto(Comment comment) {
