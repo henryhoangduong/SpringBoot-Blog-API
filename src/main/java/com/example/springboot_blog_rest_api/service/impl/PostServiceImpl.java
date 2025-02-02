@@ -6,12 +6,14 @@ import com.example.springboot_blog_rest_api.payload.PostDto;
 import com.example.springboot_blog_rest_api.payload.PostResponse;
 import com.example.springboot_blog_rest_api.repository.PostRepository;
 import com.example.springboot_blog_rest_api.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +22,12 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
+    private ModelMapper modelMapper;
+
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
         this.postRepository = postRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -87,20 +92,12 @@ public class PostServiceImpl implements PostService {
     }
 
     private PostDto mapToDto(Post post) {
-        PostDto postDto = new PostDto();
-        postDto.setContent(post.getContent());
-        postDto.setDescription(post.getDescription());
-        postDto.setId(post.getId());
-        postDto.setDescription(post.getDescription());
-        postDto.setTitle(post.getTitle());
+        PostDto postDto = modelMapper.map(post, PostDto.class);
         return postDto;
     }
 
     private Post mapToEntity(PostDto postDto) {
-        Post newPost = new Post();
-        newPost.setTitle(postDto.getTitle());
-        newPost.setDescription(postDto.getDescription());
-        newPost.setContent(postDto.getContent());
+        Post newPost = modelMapper.map(postDto, Post.class);
         return newPost;
     }
 }
