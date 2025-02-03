@@ -4,6 +4,7 @@ import com.example.springboot_blog_rest_api.payload.PostDto;
 import com.example.springboot_blog_rest_api.payload.PostResponse;
 import com.example.springboot_blog_rest_api.service.PostService;
 import com.example.springboot_blog_rest_api.utils.AppConstants;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class PostController {
         return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id) {
         return ResponseEntity.ok(postService.getPostById(id));
     }

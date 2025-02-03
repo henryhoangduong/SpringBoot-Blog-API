@@ -4,13 +4,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Data
 public class PostDto {
     private Long id;
     private String title;
     private String description;
     private String content;
-
+    private Set<CommentDto> comments;
     public PostDto() {
     }
 
@@ -24,6 +26,14 @@ public class PostDto {
 
     public String getTitle() {
         return title;
+    }
+
+    public Set<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentDto> comments) {
+        this.comments = comments;
     }
 
     public void setTitle(String title) {
