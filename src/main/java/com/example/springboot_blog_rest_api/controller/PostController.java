@@ -8,6 +8,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Object> createPost(@RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
@@ -39,7 +41,7 @@ public class PostController {
     public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id) {
         return ResponseEntity.ok(postService.getPostById(id));
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable("id") long Id) {
         return new ResponseEntity<>(postService.updatePost(postDto, Id), HttpStatus.OK);
