@@ -1,5 +1,6 @@
 package com.example.springboot_blog_rest_api.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,5 +27,14 @@ public class JwtTokenProvider  {
                 .signWith(SignatureAlgorithm.ES256,jwtSecret)
                 .compact();
         return token;
+    }
+
+    public  String getUsernameFromJWT(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .build()
+                .parseEncryptedClaims(token)
+                .getBody();
+        return claims.getSubject();
     }
 }
