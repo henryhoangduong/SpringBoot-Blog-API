@@ -17,6 +17,14 @@ public class LoginDto {
     public LoginDto() {
     }
 
+    @Override
+    public String toString() {
+        return "LoginDto{" +
+                "usernameOrEmail='" + usernameOrEmail + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public String getUsernameOrEmail() {
         return usernameOrEmail;
     }

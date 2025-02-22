@@ -1,5 +1,6 @@
 package com.example.springboot_blog_rest_api.controller;
 
+import com.example.springboot_blog_rest_api.payload.JWTAuthResponse;
 import com.example.springboot_blog_rest_api.payload.LoginDto;
 import com.example.springboot_blog_rest_api.payload.RegisterDto;
 import com.example.springboot_blog_rest_api.service.AuthService;
@@ -24,16 +25,19 @@ public class AuthController {
     }
 
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto) {
+        System.out.println(loginDto.toString());
         String response = authService.login(loginDto);
-        return ResponseEntity.ok(response);
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(response);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-        System.out.println(registerDto.toString());
-
+    public ResponseEntity<JWTAuthResponse> register(@RequestBody RegisterDto registerDto) {
         String response = authService.register(registerDto);
-        return new ResponseEntity(response, HttpStatus.CREATED);
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(response);
+        return new ResponseEntity(jwtAuthResponse, HttpStatus.CREATED);
     }
 }
