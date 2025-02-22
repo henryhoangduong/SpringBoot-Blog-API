@@ -9,6 +9,9 @@ public class RegisterDto {
     private String email;
     private String password;
 
+    public RegisterDto() {
+    }
+
     public String getName() {
         return name;
     }
@@ -39,5 +42,15 @@ public class RegisterDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "RegisterDto{" +
+                "name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
