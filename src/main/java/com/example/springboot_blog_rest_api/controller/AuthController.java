@@ -4,11 +4,9 @@ import com.example.springboot_blog_rest_api.payload.JWTAuthResponse;
 import com.example.springboot_blog_rest_api.payload.LoginDto;
 import com.example.springboot_blog_rest_api.payload.RegisterDto;
 import com.example.springboot_blog_rest_api.service.AuthService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +32,11 @@ public class AuthController {
     }
 
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<JWTAuthResponse> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+        System.out.println(registerDto.toString());
+
         String response = authService.register(registerDto);
-        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
-        jwtAuthResponse.setAccessToken(response);
-        return new ResponseEntity(jwtAuthResponse, HttpStatus.CREATED);
+
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 }
